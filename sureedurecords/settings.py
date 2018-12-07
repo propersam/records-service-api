@@ -10,20 +10,27 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
-import os
+# import os
+import environ
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+root = environ.Path('__file__') - 3  # getting the root directory moving 2 directories backward
+env = environ.Env(DEBUG=(bool, False), )  # set default values and casting
+environ.Env.read_env('.env')  # reading .env file
 
+SITE_ROOT = root()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'aaekb)r6%#*bz@$zfm8-4#4s-9=iiho3)af!1+9pl=+&o4(8px'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')  # FALSE by default if not in os.environ
+TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = []
 
@@ -74,15 +81,9 @@ WSGI_APPLICATION = 'sureedurecords.wsgi.application'
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sureedurecords',
-        'USER': 'propersam',
-        'PASSWORD': 'propersam',
-        'HOST': 'localhost',
-        'PORT': '',
-    }
+    'default': env.db(),
 }
+
 
 
 # Password validation
@@ -121,4 +122,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATIC_URL = '/static/'
+public_root = root.path('public/')
+
+MEDIA_ROOT = public_root('media')
+MEDIA_URL = 'media/'
+STATIC_ROOT = public_root('static')
+STATIC_URL = 'static/'
+
+CACHES = {
+    'default': env.cache(),
+    'redis': env.cache('REDIS_URL'),
+}
