@@ -21,15 +21,18 @@ class TermSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class LevelSerializer(serializers.HyperlinkedModelSerializer):
-    model = Level
-    fields = ('session', 'level_name', "date_created")
+    class Meta:
+        model = Level
+        fields = ('session', 'level_name', "date_created")
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
-    model = Group
-    fields = ('group_name', 'levels', "date_created")
+    class Meta:
+        model = Group
+        fields = ('group_name', 'levels', "date_created")
 
 
 class SubjectSerializer(serializers.ModelSerializer):
-    model = Subject
-    fields = ('school', 'subject_name', 'description', "date_created")
+    class Meta:
+        model = Subject
+        fields = ('school', 'subject_name', 'description', 'level', 'group', 'date_created')

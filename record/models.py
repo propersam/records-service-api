@@ -7,7 +7,7 @@ class School(models.Model):
     school_website = models.CharField("School's website", max_length=50)
     about_school = models.TextField("A Little About the School")
     school_address = models.CharField("Address of the School", max_length=120)
-    school_phone = models.CharField("School Phone number", max_length=20)
+    school_phone = models.CharField("School Phone number", unique=True, max_length=20)
     date_created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -35,18 +35,20 @@ class Term(models.Model):
 
 class Level(models.Model):
     session = models.ForeignKey(Session, on_delete=models.CASCADE, verbose_name='related session for level')
-    level_name = models.CharField("Name of Level", max_length=25)
+    level_name = models.CharField("Name of Level", unique=True, max_length=25)
     date_created = models.DateTimeField(auto_now_add=True)
 
 
 class Group(models.Model):
     group_name = models.CharField("group name", max_length=50)
-    levels = models.ManyToManyField(Level)  # many to many relationship
+    level = models.ForeignKey(Level, null=True, on_delete=models.CASCADE, verbose_name='Group related level')
     date_created = models.DateTimeField(auto_now_add=True)
 
 
 class Subject(models.Model):
     school = models.ForeignKey(School, on_delete=models.CASCADE, verbose_name='related school')
     subject_name = models.CharField("Name of School subject", max_length=50)
+    level = models.ForeignKey(Level, on_delete=models.CASCADE, verbose_name='related level offering subject', null=True)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE, verbose_name='specific group from level', null=True)
     description = models.TextField("Short subject description")
     date_created = models.DateTimeField(auto_now_add=True)

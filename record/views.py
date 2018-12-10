@@ -27,7 +27,7 @@ class TermViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows Term to be viewed or edited
     """
-    queryset = Term.objets.all().order_by("date_created")
+    queryset = Term.objects.all().order_by("date_created")
     serializer_class = TermSerializer
 
 
@@ -39,9 +39,17 @@ class LevelViewSet(viewsets.ModelViewSet):
     serializer_class = LevelSerializer
 
 
-class SubjectViewSet(viewsets.SubjectViewSet):
+class SubjectViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows Subject to be viewed or edited
     """
     queryset = Subject.objects.all().order_by("date_created")
     serializer_class = SubjectSerializer
+
+
+class GroupViewSet(viewsets.ModelViewSet):
+    """
+        API endpoint that allows Group to be viewed or edited
+        """
+    queryset = Group.objects.all().order_by("date_created")
+    serializer_class = GroupSerializer
