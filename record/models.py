@@ -9,15 +9,14 @@ class School(models.Model):
     school_address = models.CharField("Address of the School", max_length=120)
     school_phone = models.CharField("School Phone number", unique=True, max_length=20)
     date_created = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        ordering = ('date_created',)
+    date_updated = models.DateTimeField(auto_now=True)
 
 
 class Session(models.Model):
     school = models.ForeignKey(School, on_delete=models.CASCADE, verbose_name="The Related School")
     session_name = models.CharField("Name of Session", max_length=25)
     date_created = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
 
 
 class Term(models.Model):
@@ -26,23 +25,26 @@ class Term(models.Model):
         (2, 'SECOND TERM'),
         (3, 'THIRD TERM'),
     )
-    session = models.ForeignKey(Session, on_delete=models.CASCADE, verbose_name='related session')
+    school = models.ForeignKey(School, null=True, on_delete=models.CASCADE, verbose_name='related school')
     term = models.IntegerField('term type', choices=AVAILABLE_TERMS)
-    start_date = models.DateField("Starting of term date")
-    end_date = models.DateField("Ending of term date")
+    start_date = models.DateField("Starting of term date", null=True)
+    end_date = models.DateField("Ending of term date", null=True)
     date_created = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
 
 
 class Level(models.Model):
     session = models.ForeignKey(Session, on_delete=models.CASCADE, verbose_name='related session for level')
     level_name = models.CharField("Name of Level", unique=True, max_length=25)
     date_created = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
 
 
 class Group(models.Model):
     group_name = models.CharField("group name", max_length=50)
     level = models.ForeignKey(Level, null=True, on_delete=models.CASCADE, verbose_name='Group related level')
     date_created = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
 
 
 class Subject(models.Model):
@@ -50,5 +52,6 @@ class Subject(models.Model):
     subject_name = models.CharField("Name of School subject", max_length=50)
     level = models.ForeignKey(Level, on_delete=models.CASCADE, verbose_name='related level offering subject', null=True)
     group = models.ForeignKey(Group, on_delete=models.CASCADE, verbose_name='specific group from level', null=True)
-    description = models.TextField("Short subject description")
+    description = models.TextField("Short subject description", null=True)
     date_created = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
