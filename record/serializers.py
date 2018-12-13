@@ -1,12 +1,5 @@
-from record.models import School, Session, Term, Level, Group, Subject
+from record.models import Session, Term, Level, Group, Subject
 from rest_framework import serializers
-
-
-class SchoolSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = School
-        fields = ("school_name", "school_website", "about_school",
-                  "school_address", "school_phone", "date_created", "date_updated")
 
 
 class SessionSerializer(serializers.HyperlinkedModelSerializer):

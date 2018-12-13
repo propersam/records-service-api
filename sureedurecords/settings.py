@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'record',
+    'school',
 ]
 
 MIDDLEWARE = [
@@ -127,9 +128,9 @@ USE_TZ = True
 public_root = root.path('public/')
 
 MEDIA_ROOT = public_root('media')
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 STATIC_ROOT = public_root('static')
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 CACHES = {
     'default': env.cache(),

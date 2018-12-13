@@ -1,20 +1,12 @@
 # from django.shortcuts import render
-from record.models import School, Session, Level, Term, Subject, Group
+from record.models import Session, Level, Term, Subject, Group
 from rest_framework import viewsets
 
-from record.serializers import SchoolSerializer, SessionSerializer, LevelSerializer, TermSerializer, \
+from record.serializers import SessionSerializer, LevelSerializer, TermSerializer, \
     SubjectSerializer, GroupSerializer
 
 
 # Create your views here.
-class SchoolViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows schools to be viewed or edited
-    """
-    queryset = School.objects.all().order_by("date_updated")
-    serializer_class = SchoolSerializer
-
-
 class SessionViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows Session to be viewed or edited
