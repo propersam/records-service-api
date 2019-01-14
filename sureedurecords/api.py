@@ -7,7 +7,7 @@ from pupil import views as student_views
 router = routers.DefaultRouter()
 router.register(r'schools', school_views.SchoolViewSet, base_name='schools')
 router.register(r'staffs', school_views.StaffViewSet, base_name='staffs')
-router.register(r'academic-sessions', record_views.SessionViewSet, base_name='academics')
+router.register(r'academic-sessions', record_views.SessionViewSet, base_name='sessions')
 router.register(r'academic-terms', record_views.TermViewSet, base_name='terms')
 router.register(r'school-levels', record_views.LevelViewSet, base_name='levels')
 router.register(r'school-subjects', record_views.SubjectViewSet, base_name='subjects')

@@ -9,8 +9,7 @@ class SchoolSerializer(serializers.ModelSerializer):
 
 
 class StaffSerializer(serializers.ModelSerializer):
-    schools = SchoolSerializer(many=True)
-
+   # school = SchoolSerializer(many=True)
     class Meta:
         model = Staff
         fields = '__all__'

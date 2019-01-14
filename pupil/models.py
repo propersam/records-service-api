@@ -16,7 +16,7 @@ class Student(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return "{} {} (level: {})".format(self.first_name, self.last_name, self.current_level)
+        return "{} {} (level: {})".format(self.first_name, self.last_name, self.level)
 
     class Meta:
         ordering = ('-updated_at',)
