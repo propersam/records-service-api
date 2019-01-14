@@ -42,14 +42,16 @@ class Staff(models.Model):
         ('O', 'Other'),
     )
 
-    school = models.ForeignKey(School, on_delete=models.CASCADE, verbose_name='The School that staff belongs to')
+    school = models.ForeignKey(School, on_delete=models.CASCADE, related_name='schools',
+                               verbose_name='The School that staff belongs to')
     first_name = models.CharField('Staff\'s first name', max_length=25)
     last_name = models.CharField("Staff's Sur Name", max_length=25)
     gender = models.CharField("Teacher's gender", choices=GENDER_OPTIONS, max_length=5)
     phone = models.CharField("Staff's contact phone number", max_length=25)
     email = models.CharField("Staff's working email", max_length=50, null=True)
     # staff_type = models.CharField('The role of the staff', choices=STAFF_TYPES, max_length=5)
-    profile_pics = models.CharField('profile picture of staff', max_length=50, null=True, blank=True)
+    profile_pics = models.CharField('profile picture of staff', max_length=50,
+                                    default='no profile pix uploaded', blank=True)
     date_employed = models.DateField(null=True, blank=True)
     date_relieved = models.DateField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)

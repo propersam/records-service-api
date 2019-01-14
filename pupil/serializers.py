@@ -5,7 +5,7 @@ from rest_framework import serializers
 class StudentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Student
-        fields = ('school', 'unique_tag', 'first_name', 'last_name', 'enrolled_level', 'current_level',
+        fields = ('school', 'unique_tag', 'first_name', 'last_name', 'level',
                   'created_at', 'updated_at')
 
 

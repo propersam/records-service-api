@@ -10,9 +10,8 @@ class Student(models.Model):
                                   null=True, blank=True, max_length=20)
     first_name = models.CharField('Students first name', max_length=25)
     last_name = models.CharField('Students Surname', max_length=25)
-    enrolled_level = models.ForeignKey(Level, on_delete=models.CASCADE,
-                                       null=True, verbose_name="The Level student was first Enrolled In")
-    current_level = models.CharField("The Student's current level", max_length=20, null=True, blank=True)
+    level = models.ForeignKey(Level, on_delete=models.CASCADE, verbose_name="The Student's current level",
+                              null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
