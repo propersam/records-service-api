@@ -85,7 +85,13 @@ WSGI_APPLICATION = 'sureedurecords.wsgi.application'
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 DATABASES = {
-    'default': env.db(),
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'HOST': 'db', # OR any host for the dataase
+        'PORT': 5432
+    }
 }
 
 
