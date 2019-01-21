@@ -2,7 +2,6 @@ image: docker:stable
 services:
   - docker:dind
 
-
 stages:
   - build
   - test
@@ -17,11 +16,11 @@ variables:
   POSTGRES_PASSWORD: sureedu
   POSTGRES_DB: sureedurecords
 
-before_script:
-  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
 
 build:
   stage: build
+  before_script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
   script:
     - docker build --pull -t $CONTAINER_TEST_IMAGE .
     - docker push $CONTAINER_TEST_IMAGE
@@ -32,12 +31,14 @@ test:
     - name: postgres:latest
       alias: postgres
     - name: $CONTAINER_TEST_IMAGE
-    - entrypoint: [""]
+      entrypoint: [""]
   script:
     - python manage.py test
 
 release-image:
   stage: release
+  before_script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
   script:
     - docker pull $CONTAINER_TEST_IMAGE
     - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
