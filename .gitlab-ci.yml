@@ -31,7 +31,7 @@ test:
     - name: postgres:latest
       alias: postgres
     - name: $CONTAINER_TEST_IMAGE
-      entrypoint: [""]
+      command: ["/bin/bash"]
   script:
     - python manage.py test
 
