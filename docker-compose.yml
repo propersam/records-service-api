@@ -1,10 +1,17 @@
 version: '3'
 
 services:
-  db:
-    image: postgres:10.1-alpine
+  postgres:
+    image: postgres:latest
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
+      - postgres_data1:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_DB: sureedurecords
+      POSTGRES_USER: sureedu
+      POSTGRES_PASSWORD: sureedu
+
+  redis:
+    image: redis:5-alpine
 
   web:
     build: .
@@ -14,8 +21,10 @@ services:
       - .:/usr/src/app
     ports:
       - 8000:8000
+      - 5432:5432
+      - 6379:6379
     depends_on:
-      - db
+      - postgres
 
 volumes:
-  postgres_data:
+  postgres_data1:

@@ -17,8 +17,8 @@ import environ
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 root = environ.Path('__file__') - 3  # getting the root directory moving 2 directories backward
-env = environ.Env(DEBUG=(bool, False), )  # set default values and casting
-environ.Env.read_env('.env')  # reading .env file
+# env = environ.Env(DEBUG=(bool, False), )  # set default values and casting
+# environ.Env.read_env('.env')  # reading .env file
 
 SITE_ROOT = root()
 
@@ -26,17 +26,18 @@ SITE_ROOT = root()
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+# SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = 'aaekb)r6%#*bz@$zfm8-4#4s-9=iiho3)af!1+9pl=+&o4(8px'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG')  # FALSE by default if not in os.environ
+# DEBUG = env('DEBUG')  # FALSE by default if not in os.environ
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS = []
-
+# Allowed hosts (list of comma-separated host names, or asterisk to match all hosts), only needed if DEBUG is false
+ALLOWED_HOSTS = ['testserver', '*']
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -87,10 +88,14 @@ WSGI_APPLICATION = 'sureedurecords.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'HOST': 'db', # OR any host for the dataase
-        'PORT': 5432
+        'NAME': 'sureedurecords',
+        'USER': 'sureedu',
+        'PASSWORD': 'sureedu',
+        'HOST': 'postgres', # OR any host for the dataase
+        'PORT': 5432,
+        'TEST': {
+            'NAME': 'testdatabase',
+        }
     }
 }
 
@@ -139,8 +144,16 @@ STATIC_ROOT = public_root('static')
 STATIC_URL = '/static/'
 
 CACHES = {
-    'default': env.cache(),
-    'redis': env.cache('REDIS_URL'),
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://redis:6379/',
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
+    }
+    # 'default': {
+    #     'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    # },
 }
 
 REST_FRAMEWORK = {
