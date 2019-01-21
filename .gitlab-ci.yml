@@ -31,7 +31,7 @@ test:
   stage: test
   image:
     name: $CONTAINER_TEST_IMAGE
-    entrypoint: ["/bin/bash"]
+    entrypoint: [""]
   script:
     - python manage.py test
 
