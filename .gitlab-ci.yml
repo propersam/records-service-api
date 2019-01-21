@@ -1,8 +1,7 @@
 image: docker:stable
 services:
-  - name: docker:dind
-  - name: postgres:latest
-    alias: postgres
+  - docker:dind
+
 
 stages:
   - build
@@ -29,11 +28,11 @@ build:
 
 test:
   stage: test
-  image:
-    name: $CONTAINER_TEST_IMAGE
-    entrypoint: [""]
-  script:
-    - python manage.py test
+  services:
+    - name: postgres:latest
+      alias: postgres
+    - name: $CONTAINER_TEST_IMAGE
+      command: ["python", "manage.py", "test"]
 
 release-image:
   stage: release
