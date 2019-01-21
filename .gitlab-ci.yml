@@ -29,7 +29,7 @@ test:
   stage: test
   image:
     name: $CONTAINER_TEST_IMAGE
-    entrypoint: ["/bin/bash"]
+    entrypoint: [""]
 
   services:
     - name: postgres:latest
