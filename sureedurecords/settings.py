@@ -87,9 +87,10 @@ WSGI_APPLICATION = 'sureedurecords.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'HOST': 'db', # OR any host for the dataase
+        'NAME': 'sureedurecords',
+        'USER': 'sureedu',
+        'PASSWORD': 'sureedu',
+        'HOST': 'postgres', # OR any host for the dataase
         'PORT': 5432
     }
 }
