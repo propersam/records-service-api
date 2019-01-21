@@ -27,11 +27,14 @@ build:
 
 test:
   stage: test
+  image:
+    name: $CONTAINER_TEST_IMAGE
+    entrypoint: ["/bin/bash"]
+
   services:
     - name: postgres:latest
       alias: postgres
-    - name: $CONTAINER_TEST_IMAGE
-      command: ["/bin/bash"]
+
   script:
     - python manage.py test
 
