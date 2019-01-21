@@ -32,7 +32,9 @@ test:
     - name: postgres:latest
       alias: postgres
     - name: $CONTAINER_TEST_IMAGE
-      command: ["python", "manage.py", "test"]
+    - entrypoint: [""]
+  script:
+    - python manage.py test
 
 release-image:
   stage: release
