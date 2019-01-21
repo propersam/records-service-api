@@ -10,6 +10,9 @@ services:
       POSTGRES_USER: sureedu
       POSTGRES_PASSWORD: sureedu
 
+  redis:
+    image: redis:5-alpine
+
   web:
     build: .
     image: registry.gitlab.com/suretradebsl/sureedu-sms/sureedu.service.recordspropersam/sureedu-records
@@ -19,6 +22,7 @@ services:
     ports:
       - 8000:8000
       - 5432:5432
+      - 6379:6379
     depends_on:
       - postgres
 

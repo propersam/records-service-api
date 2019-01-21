@@ -34,9 +34,14 @@ test:
   services:
     - name: postgres:latest
       alias: postgres
+    - name: redis:5-alpine
+      alias: redis
 
   script:
     - python manage.py test
+
+  only:
+    - branches
 
 release-image:
   stage: release
