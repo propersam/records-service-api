@@ -1,5 +1,5 @@
 from django.test import TestCase
-from ..models import School, Staff
+from school.models import School
 from datetime import date
 
 
@@ -14,14 +14,14 @@ class SchoolTestCase(TestCase):
         self.school_address = "67, macaul crescent moshalashi mushin, jibowu Lagos"
         self.school_phone = '08041971994'
 
-        # Test Data for Staff model
-        # self.school2 = School.objects.get(id=1)
-        self.first_name = 'Sodiq'
-        self.last_name = 'Hassan'
-        self.gender = 'M'
-        self.phone = '07055078897'
-        self.email = 'propersam2012@example.com'
-        self.date_employed = date.today()
+        # # Test Data for Staff model
+        # # self.school2 = School.objects.get(id=1)
+        # self.first_name = 'Sodiq'
+        # self.last_name = 'Hassan'
+        # self.gender = 'M'
+        # self.phone = '07055078897'
+        # self.email = 'propersam2012@example.com'
+        # self.date_employed = date.today()
 
     def create_school_model(self):
         """ Test clients and other Test variables for School Model are defined here  """
@@ -31,13 +31,13 @@ class SchoolTestCase(TestCase):
             school_website=self.school_website, school_phone=self.school_phone
         )
 
-    def create_staff_model(self):
+    # def create_staff_model(self):
 
-        school = self.create_school_model()
-        return Staff.objects.create(
-            school_id=school.id, first_name=self.first_name, last_name=self.last_name,
-            gender=self.gender, phone=self.phone, email=self.email, date_employed=self.date_employed
-        )
+    #     school = self.create_school_model()
+    #     return Staff.objects.create(
+    #         school_id=school.id, first_name=self.first_name, last_name=self.last_name,
+    #         gender=self.gender, phone=self.phone, email=self.email, date_employed=self.date_employed
+    #     )
 
     def test_model_can_create_school(self):
         """ Test the School Model can create new School record """
@@ -46,12 +46,12 @@ class SchoolTestCase(TestCase):
         print('New school record added successfully')
         print('[info] school model working fine.')
 
-    def test_model_can_create_staff(self):
-        """ Test the Staff Model Can create New Staff Record """
-        staff = self.create_staff_model()
-        print('New Staff record added successfully')
-        self.assertEqual(str(staff), "{} {}".format(staff.last_name, staff.first_name))
-        print('Staff model working very fine')
+    # def test_model_can_create_staff(self):
+    #     """ Test the Staff Model Can create New Staff Record """
+    #     staff = self.create_staff_model()
+    #     print('New Staff record added successfully')
+    #     self.assertEqual(str(staff), "{} {}".format(staff.last_name, staff.first_name))
+    #     print('Staff model working very fine')
 
 
 # class StaffModelTestCase(TestCase):

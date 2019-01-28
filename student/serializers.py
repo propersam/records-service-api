@@ -1,4 +1,4 @@
-from .models import Student, Parent, StudentAchievement
+from student.models import Student, Parent, StudentAchievement
 from rest_framework import serializers
 
 
@@ -10,9 +10,10 @@ class StudentSerializer(serializers.ModelSerializer):
 
 
 class ParentSerializer(serializers.ModelSerializer):
+    students = serializers.PrimaryKeyRelatedField(many=True, read_only=False, queryset=Student.objects.all())
     class Meta:
         model = Parent
-        fields = ('student', 'full_name', 'email', 'phone_num', 'email', 'home_addr', 'emergency_numbers',
+        fields = ('students', 'full_name', 'email', 'phone_num', 'email', 'home_addr', 'emergency_numbers',
                   'created_at', 'updated_at')
 
 

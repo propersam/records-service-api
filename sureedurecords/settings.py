@@ -45,10 +45,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'rest_framework',
     'record',
-    'school',
-    'pupil',
+    'student',
+    # 'staff',
 ]
 
 MIDDLEWARE = [
@@ -87,12 +88,12 @@ WSGI_APPLICATION = 'sureedurecords.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'sureedurecords',
         'USER': 'sureedu',
         'PASSWORD': 'sureedu',
-        'HOST': 'postgres', # OR any host for the dataase
-        'PORT': 5432,
+        'HOST': 'localhost', # OR any host for the dataase
+        'PORT': 3306,
         'TEST': {
             'NAME': 'testdatabase',
         }

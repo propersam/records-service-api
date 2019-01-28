@@ -1,11 +1,10 @@
 from django.db import models
-from school.models import School
 
 
 # Create your models here.
 class Session(models.Model):
-    school = models.ForeignKey(School, on_delete=models.CASCADE, verbose_name="The Related School")
-    session_name = models.CharField("Name of Session", max_length=25)
+    school_organisation_id = models.PositiveIntegerField("The Related School Organisation")
+    session = models.CharField("Name of Session", max_length=25)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -22,7 +21,7 @@ class Term(models.Model):
         (2, 'SECOND TERM'),
         (3, 'THIRD TERM'),
     )
-    school = models.ForeignKey(School, on_delete=models.CASCADE, verbose_name='related school')
+    school_organisation_id = models.PositiveIntegerField("The Related School Organisation")
     term = models.IntegerField('term type', choices=AVAILABLE_TERMS)
     start_date = models.DateField("Starting of term date", null=True, blank=True)
     end_date = models.DateField("Ending of term date", null=True, blank=True)
@@ -37,8 +36,9 @@ class Term(models.Model):
 
 
 class Level(models.Model):
+    school_organisation_id = models.PositiveIntegerField("The Related School Organisation")
     session = models.ForeignKey(Session, on_delete=models.CASCADE, verbose_name='related session for level')
-    level_name = models.CharField("Name of Level", unique=True, max_length=25)
+    level = models.CharField("Name of Level", unique=True, max_length=25)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -50,8 +50,9 @@ class Level(models.Model):
 
 
 class Group(models.Model):
+    school_organisation_id = models.PositiveIntegerField("The Related School Organisation")
     level = models.ForeignKey(Level, on_delete=models.CASCADE, verbose_name='level that group belongs to', null=True)
-    group_name = models.CharField("group name", unique=True, max_length=50)
+    group = models.CharField("group name", unique=True, max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -63,11 +64,11 @@ class Group(models.Model):
 
 
 class Subject(models.Model):
-    school = models.ForeignKey(School, on_delete=models.CASCADE, verbose_name="School where subject is offered")
+    school_organisation_id = models.PositiveIntegerField("The Related School Organisation")
     levels = models.ManyToManyField(Level, verbose_name='levels offering subject')
     term = models.ForeignKey(Term, on_delete=models.CASCADE, verbose_name='term in which subject is offered')
     groups = models.ManyToManyField(Group, verbose_name='groups offering subject')
-    subject_name = models.CharField("Name of School subject", unique=True, max_length=50)
+    subject = models.CharField("Name of School subject", unique=True, max_length=50)
     description = models.TextField("Short description for subject", null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -80,8 +81,8 @@ class Subject(models.Model):
 
 
 class Achievement(models.Model):
-    school = models.ForeignKey(School, on_delete=models.CASCADE, verbose_name="School where the achievement exists")
-    name = models.CharField("The name of the achievement", max_length=50)
+    school_organisation_id = models.PositiveIntegerField("The Related School Organisation")
+    achievement = models.CharField("The name of the achievement", max_length=50)
     value = models.IntegerField("The numeric value attached to this achievement")
     level = models.ForeignKey(Level, on_delete="models.CASCADE",
                               verbose_name="The level that the achievement belongs to", blank=True, null=True)

@@ -1,7 +1,7 @@
 from rest_framework.test import APITestCase, APIClient
 from rest_framework.test import APIRequestFactory
 from django.urls import reverse
-from school.views import SchoolViewSet, StaffViewSet
+from school.views import SchoolViewSet
 import json
 
 
