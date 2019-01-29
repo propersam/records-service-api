@@ -8,9 +8,9 @@ services:
       - mysql_data3:/var/lib/mysql/
     environment:
       MYSQL_DATABASE: sureedurecords
-      MYSQL_USER: sureedu
-      MYSQL_PASSWORD: sureedu
-      MYSQL_ROOT_PASSWORD: admin
+      # MYSQL_USER: sureedu
+      # MYSQL_PASSWORD: sureedu
+      MYSQL_ROOT_PASSWORD: sureedu
 
   redis:
     image: redis:5-alpine

@@ -79,7 +79,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'sureedurecords',
-        'USER': 'sureedu',
+        'USER': 'root',
         'PASSWORD': 'sureedu',
         'HOST': 'mysqldb', # OR any host for the dataase
         'PORT': 3306,
