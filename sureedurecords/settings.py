@@ -81,7 +81,7 @@ DATABASES = {
         'NAME': 'sureedurecords',
         'USER': 'sureedu',
         'PASSWORD': 'sureedu',
-        'HOST': 'localhost', # OR any host for the dataase
+        'HOST': 'mysql', # OR any host for the dataase
         'PORT': 3306,
         'TEST': {
             'NAME': 'testdatabase',

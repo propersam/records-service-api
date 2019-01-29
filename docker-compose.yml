@@ -1,30 +1,35 @@
 version: '3'
 
 services:
-  postgres:
-    image: postgres:latest
+  mysql:
+    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
     volumes:
-      - postgres_data1:/var/lib/postgresql/data/
+      - mysql_data3:/var/lib/mysql/
     environment:
-      POSTGRES_DB: sureedurecords
-      POSTGRES_USER: sureedu
-      POSTGRES_PASSWORD: sureedu
+      MYSQL_DATABASE: sureedurecords
+      MYSQL_USER: sureedu
+      MYSQL_PASSWORD: sureedu
+      MYSQL_ROOT_PASSWORD: admin
 
   redis:
     image: redis:5-alpine
+    restart: always
 
   web:
     build: .
     image: registry.gitlab.com/suretradebsl/sureedu-sms/sureedu.service.recordspropersam/sureedu-records
     command: python /usr/src/app/manage.py runserver 0.0.0.0:8000
+    restart: always
     volumes:
       - .:/usr/src/app
     ports:
       - 8000:8000
-      - 5432:5432
+      - 3306:3306
       - 6379:6379
     depends_on:
-      - postgres
+      - mysql
 
 volumes:
-  postgres_data1:
+  mysql_data3:
