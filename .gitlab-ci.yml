@@ -1,4 +1,5 @@
 image: docker:stable
+
 services:
   - docker:dind
 
@@ -7,15 +8,14 @@ stages:
   - release
 
 variables:
-  DOCKER_HOST: tcp://docker:2375
-  DOCKER_DRIVER: overlay2
+  # DOCKER_HOST: tcp://docker:2375
+  # DOCKER_DRIVER: overlay2
   CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
   CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
-  MYSQL_DATABASE: sureedurecords
-  MYSQL_ROOT_PASSWORD: sureedu
+  
 
 before_script:
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
 
 build:
   stage: build
@@ -26,8 +26,6 @@ build:
 
 release-image:
   stage: release
-  before_script:
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
   script:
     - docker pull $CONTAINER_TEST_IMAGE
     - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
