@@ -24,23 +24,6 @@ build:
     - docker build --pull -t $CONTAINER_TEST_IMAGE .
     - docker push $CONTAINER_TEST_IMAGE
 
-test:
-  stage: test
-  image:
-    name: $CONTAINER_TEST_IMAGE
-    entrypoint: [""]
-
-  services:
-    - name: mysql:5.7
-      alias: mysqldb
-    - name: redis:5-alpine
-      alias: redis
-
-  script:
-    - python manage.py test
-
-  only:
-    - master
 
 release-image:
   stage: release
