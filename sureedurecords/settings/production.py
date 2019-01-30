@@ -14,8 +14,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'sureedurecords',
-        'USER': 'sureedu',
-        'PASSWORD': 'sureedu',
+        'USER': os.environ.get('DB_USER', 'sureedu'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'sureedu'),
         'HOST': 'mysql', # OR any host for the database
         'PORT': 3306,
         'TEST': {
@@ -36,3 +36,7 @@ CACHES = {
     #     'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
     # },
 }
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
