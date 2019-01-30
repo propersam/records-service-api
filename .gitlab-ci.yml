@@ -4,7 +4,6 @@ services:
 
 stages:
   - build
-  - test
   - release
 
 variables:
@@ -15,11 +14,11 @@ variables:
   MYSQL_DATABASE: sureedurecords
   MYSQL_ROOT_PASSWORD: sureedu
 
+before_script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
 
 build:
   stage: build
-  before_script:
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
   script:
     - docker build --pull -t $CONTAINER_TEST_IMAGE .
     - docker push $CONTAINER_TEST_IMAGE
