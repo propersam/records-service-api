@@ -1,25 +1,18 @@
-
-# import os
-import environ
-
+import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-root = environ.Path('__file__') - 3  # getting the root directory moving 2 directories backward
-# env = environ.Env(DEBUG=(bool, False), )  # set default values and casting
-# environ.Env.read_env('.env')  # reading .env file
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SITE_ROOT = root()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = env('SECRET_KEY')
+
 SECRET_KEY = 'aaekb)r6%#*bz@$zfm8-4#4s-9=iiho3)af!1+9pl=+&o4(8px'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = env('DEBUG')  # FALSE by default if not in os.environ
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -79,9 +72,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'sureedurecords',
-        'USER': 'root',
+        'USER': 'sureedu',
         'PASSWORD': 'sureedu',
-        'HOST': 'mysqldb', # OR any host for the dataase
+        'HOST': 'localhost', # OR any host for the dataase
         'PORT': 3306,
         'TEST': {
             'NAME': 'testdatabase',
@@ -126,24 +119,24 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-public_root = root.path('public/')
 
-MEDIA_ROOT = public_root('media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 MEDIA_URL = '/media/'
-STATIC_ROOT = public_root('static')
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 STATIC_URL = '/static/'
 
 CACHES = {
-    'default': {
-        'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://redis:6379/',
-        'OPTIONS': {
-            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-        }
-    }
     # 'default': {
-    #     'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-    # },
+    #     'BACKEND': 'django_redis.cache.RedisCache',
+    #     'LOCATION': 'redis://redis:6379/',
+    #     'OPTIONS': {
+    #         'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+    #     }
+    # }
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    },
 }
 
 REST_FRAMEWORK = {
