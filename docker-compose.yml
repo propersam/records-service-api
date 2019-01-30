@@ -1,35 +1,51 @@
 version: '3'
 
 services:
-  mysqldb:
-    image: mysql:latest
-    # command: --default-authentication-plugin=mysql_native_password
-    restart: always
-    volumes:
-      - mysql_data5:/var/lib/mysql/
+  db:
     environment:
-      MYSQL_DATABASE: sureedurecords
+      #MYSQL_DATABASE: sureedurecords
       # MYSQL_USER: sureedu
       # MYSQL_PASSWORD: sureedu
-      MYSQL_ROOT_PASSWORD: sureedu
+      #MYSQL_ROOT_PASSWORD: sureedu
+      POSTGRES_DB: sureedurecords
+      POSTGRES_USER: sureedu
+      POSTGRES_PASSWORD: sureedu
+    restart: always
+    # image: mysql:latest
+    image: postgres:9.6
+    expose:
+      - "5432"
+    # command: --default-authentication-plugin=mysql_native_password
+    
+    # volumes:
+    #   - mysql_data5:/var/lib/mysql/
+    
 
   redis:
-    image: redis:5-alpine
     restart: always
+    image: redis:5.0
+    expose:
+      - "6379"
 
-  web:
+  app:
+    environment:
+      DATABASE_URL: postgres://sureedu:sureedu@db/sureedurecords
+      REDIS_URL: redis://redis
+      DJANGO_MANAGEPY_MIGRATE: on
     build: .
-    image: registry.gitlab.com/suretradebsl/sureedu-sms/sureedu.service.recordspropersam/sureedu-records
-    command: python /usr/src/app/manage.py runserver 0.0.0.0:8000
-    restart: always
+    # image: registry.gitlab.com/suretradebsl/sureedu-sms/sureedu.service.recordspropersam/sureedu-records
     volumes:
       - .:/usr/src/app
+    links:
+      - db:db
+      - redis:redis
     ports:
-      - 8000:8000
-      - 3306:3306
-      - 6379:6379
-    depends_on:
-      - mysqldb
+      - "8000:8000"
+      # - "3306:3306"
+      # - "5432:5432"
+      # - "6379:6379"
+    # depends_on:
+    #   - mysqldb
 
-volumes:
-  mysql_data5:
+# volumes:
+#   mysql_data5:

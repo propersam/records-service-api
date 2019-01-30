@@ -12,15 +12,16 @@ ALLOWED_HOSTS = ['testserver', '*']
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sureedurecords',
-        'USER': os.environ.get('DB_USER', 'sureedu'),
-        'PASSWORD': os.environ.get('DB_PASSWORD', 'sureedu'),
-        'HOST': 'mysql', # OR any host for the database
-        'PORT': 3306,
-        'TEST': {
-            'NAME': 'testdatabase',
-        }
+        'ENGINE': 'django.db.backends.postgresql',
+         'DEFAULT-CHARACTER-SET': 'utf8',
+        # 'NAME': 'sureedurecords',
+        # 'USER': 'sureedu',
+        # 'PASSWORD': 'sureedu',
+        # 'HOST': 'db', # OR any host for the database
+        # 'PORT': 5432,
+        # 'TEST': {
+        #     'NAME': 'testdatabase',
+        # },
     }
 }
 
