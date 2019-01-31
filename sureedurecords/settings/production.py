@@ -14,14 +14,14 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
          'DEFAULT-CHARACTER-SET': 'utf8',
-        # 'NAME': 'sureedurecords',
-        # 'USER': 'sureedu',
-        # 'PASSWORD': 'sureedu',
-        # 'HOST': 'db', # OR any host for the database
-        # 'PORT': 5432,
-        # 'TEST': {
-        #     'NAME': 'testdatabase',
-        # },
+        'NAME': 'sureedurecords',
+        'USER': 'sureedu',
+        'PASSWORD': 'sureedu',
+        'HOST': 'db', # OR any host for the database
+        'PORT': 5432,
+        'TEST': {
+            'NAME': 'testdatabase',
+        },
     }
 }
 

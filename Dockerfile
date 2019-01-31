@@ -44,7 +44,7 @@ ENV UWSGI_VIRTUALENV=/venv UWSGI_WSGI_FILE=sureedurecords/wsgi.py UWSGI_HTTP=:80
 # Call collectstatic (customize the following line with the minimal environment variables needed for manage.py to run):
 RUN DATABASE_URL=none /venv/bin/python manage.py collectstatic --noinput
 
-ENTRYPOINT ["/code/docker-entrypoint.sh"]
+# ENTRYPOINT ["/code/docker-entrypoint.sh"]
 
 # Start uWSGI
 CMD ["/venv/bin/uwsgi", "--http-auto-chunked", "--http-keepalive"]
