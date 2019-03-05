@@ -9,7 +9,7 @@ RUN apt-get -y install python3-pip \
         libapache2-mod-wsgi-py3 virtualenvwrapper
 
 # Copy your application code to the container (make sure you create a .dockerignore file if any large files or directories should be excluded)
-COPY sureedu_auth.conf /etc/apache2/sites-available/000-default.conf
+COPY sureedu_records.conf /etc/apache2/sites-available/000-default.conf
 
 RUN mkdir /code/
 WORKDIR /code/
