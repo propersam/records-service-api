@@ -22,7 +22,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN chmod 775 /code/
 RUN chown -R :www-data /code && a2enmod rewrite
 RUN chown -R :www-data /code/sureedurecords/media/
-RUN chmod -R 775 /code/sureedurecords/media
+#RUN chmod -R 775 /code/sureedurecords/media
 
 # Apache will listen on this port
 EXPOSE 80 443
