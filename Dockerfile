@@ -25,7 +25,7 @@ RUN chown -R :www-data /code/sureedurecords/media/
 RUN chmod -R 775 /code/sureedurecords/media
 
 # Apache will listen on this port
-EXPOSE 80
+EXPOSE 80 443
 
 # uWSGI will listen on this port
 # EXPOSE 8000
@@ -44,3 +44,4 @@ ENV DJANGO_SETTINGS_MODULE=sureedurecords.settings.production
 
 # start Apache2
 CMD ["/usr/sbin/apache2ctl", "-k", "start"]
+#CMD ["bash", "-c", "service apache2 start"]
