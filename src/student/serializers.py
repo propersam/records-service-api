@@ -6,7 +6,7 @@ class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
         fields = ('school_organisation_id', 'first_name', 'last_name','reg_num', 
-        'level' ,'home_addr', 'level', 'profile_pics',
+        'level' , 'level', 'profile_pics',
                   'created_at', 'updated_at')
 
 
