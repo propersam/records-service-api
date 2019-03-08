@@ -15,12 +15,12 @@ ALLOWED_HOSTS = ['testserver', '*']
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'sureedurecords',
         'USER': 'sureedu',
         'PASSWORD': 'sureedu',
         'HOST': 'localhost', # OR any host for the dataase
-        'PORT': 5432,
+        'PORT': 3306,
         'TEST': {
             'NAME': 'testdatabase',
         },
