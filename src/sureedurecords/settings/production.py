@@ -1,8 +1,8 @@
 from sureedurecords.settings.common import *
 
-DEBUG = False
+DEBUG = config['DEBUG']
 
-SECRET_KEY = os.environ.get('SECRET_KEY', 'aaekb)r6%#*bz@$zfm8-4#4s-9=iiho3)af!1+9pl=+&o4(8px')
+SECRET_KEY = config['SECRET_KEY']
 
 # Allowed hosts (list of comma-separated host names, or asterisk to match all hosts), only needed if DEBUG is false
 ALLOWED_HOSTS = ['testserver', '*']
@@ -14,10 +14,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
          'DEFAULT-CHARACTER-SET': 'utf8',
-        'NAME': 'sureedurecords',
-        'USER': 'sureedu',
-        'PASSWORD': 'sureedu',
-        'HOST': 'db', # OR any host for the database
+        'NAME': config['DB_NAME'],
+        'USER': config['DB_USER'],
+        'PASSWORD': config['DB_PASS'],
+        'HOST': config['DB_HOST'], # OR any host for the database
         'PORT': 5432,
         'TEST': {
             'NAME': 'testdatabase',
@@ -41,3 +41,8 @@ CACHES = {
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
+BUGSNAG = {
+    'api_key': config['BUGSNAG_API_KEY'],
+    'project_root': '/code/src'
+}

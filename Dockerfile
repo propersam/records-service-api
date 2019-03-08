@@ -12,6 +12,7 @@ RUN apt-get -y install python3-pip \
 # setup all the configfiles
 #RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 COPY sureedu_records.conf /etc/nginx/sites-available/default
+COPY config.json /etc/
 
 # Copy your application code to the container (make sure you create a .dockerignore file if any large files or directories should be excluded)
 
