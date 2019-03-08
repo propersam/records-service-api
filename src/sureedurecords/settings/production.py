@@ -4,7 +4,7 @@ with open('/etc/config.json') as config_file:
     config = json.load(config_file)
 
 
-DEBUG = config['DEBUG']
+DEBUG = False
 
 SECRET_KEY = config['SECRET_KEY']
 
