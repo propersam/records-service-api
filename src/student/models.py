@@ -11,7 +11,7 @@ class Student(models.Model):
     last_name = models.CharField('Student\'s Surname', max_length=25)
     level = models.ForeignKey(Level, on_delete=models.CASCADE, verbose_name="The Student's current level",
                               null=True, blank=True)
-    profile_pic = models.CharField("Student profile picture", max_length=100, null=True, blank=True)
+    profile_pic = models.ImageField("Student profile picture", upload_to="profile_pics/student", max_length=100, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
