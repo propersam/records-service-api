@@ -1,5 +1,5 @@
 {
-    "DEBUG":"FALSE",
+    "DEBUG":"False",
     "SECRET_KEY":"aaekb)r6%#*bz@$zfm8-4#4s-9=iiho3)af!1+9pl=+&o4(8px",
     "DB_NAME":"sureedurecords",
     "DB_USER":"sureedu",
