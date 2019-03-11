@@ -24,7 +24,7 @@ class Student(models.Model):
 
 class Parent(models.Model):
     school_organisation_id = models.PositiveIntegerField("The School Organisation")
-    students = models.ManyToManyField(Student, related_name='students', verbose_name="Students belonging to this parent")
+    students = models.ManyToManyField(Student, related_name='parents', verbose_name="Students belonging to this parent")
     user_id = models.PositiveIntegerField("Parent's related Id on User Service", unique=True)
     home_addr = models.TextField(verbose_name="Home Address")
     emergency_numbers = models.TextField("Enter comma separated numbers in case of emergency", max_length=50)
